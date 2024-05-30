@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .cart,
+        .products {
+            width: 40%;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .cart h2,
+        .products h2 {
+            text-align: center;
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        #cart-items li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="total">0.00</span></p>
+    </div>
+
+    <div class="products">
+        <h2>Products</h2>
+        <ul id="product-list">
+            <li data-id="1" data-price="20.00" onclick="addToCart(this)">Product 1 - $20.00</li>
+            <li data-id="2" data-price="30.00" onclick="addToCart(this)">Product 2 - $30.00</li>
+            <li data-id="3" data-price="15.00" onclick="addToCart(this)">Product 3 - $15.00</li>
+        </ul>
+    </div>
+
+    <script>
+        function addToCart(product) {
+            const cartItemsElement = document.getElementById('cart-items');
+            const totalElement = document.getElementById('total');
+            const productId = product.dataset.id;
+            const productPrice = parseFloat(product.dataset.price);
+
+            // Create a new list item for the cart
+            const cartItem = document.createElement('li');
+            cartItem.textContent = `Product ${productId} - $${productPrice.toFixed(2)}`;
+
+            // Append the item to the cart
+            cartItemsElement.appendChild(cartItem);
+
+            // Update the total price
+            updateTotal(productPrice);
+        }
+
+        function updateTotal(price) {
+            const totalElement = document.getElementById('total');
+            const currentTotal = parseFloat(totalElement.textContent);
+            const newTotal = currentTotal + price;
+            totalElement.textContent = newTotal.toFixed(2);
+        }
+    </script>
+</body>
+</html>

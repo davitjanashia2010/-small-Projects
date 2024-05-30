@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #chat-container {
+            width: 300px;
+            margin: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Chatbot</h1>
+
+    <div id="chat-container"></div>
+
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value;
+            const chatContainer = document.getElementById('chat-container');
+
+            // User message
+            const userMessage = document.createElement('div');
+            userMessage.innerHTML = `<strong>You:</strong> ${userInput}`;
+            chatContainer.appendChild(userMessage);
+
+            // AI response (simulated)
+            const aiResponse = document.createElement('div');
+            aiResponse.innerHTML = `<strong>AI:</strong> ${getRandomResponse()}`;
+            chatContainer.appendChild(aiResponse);
+
+            // Clear the input field
+            document.getElementById('userInput').value = '';
+
+            // Scroll to the bottom to show the latest messages
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function getRandomResponse() {
+            const responses = [
+                "I'm not sure what you mean.",
+                "Tell me more.",
+                "Interesting!",
+                "I'm still learning!",
+                "Can you rephrase that?",
+                "How can I assist you?",
+            ];
+
+            const randomIndex = Math.floor(Math.random() * responses.length);
+            return responses[randomIndex];
+        }
+    </script>
+</body>
+</html>
